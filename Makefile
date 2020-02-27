@@ -37,11 +37,11 @@ build/layer.zip: result/bin/identify build
 	cd result && zip -ry $(PROJECT_ROOT)$@ *
 
 build/output.yaml: template.yaml build/layer.zip
-	aws cloudformation package --template $< --s3-bucket $(DEPLOYMENT_BUCKET) --output-template-file $@
+	aws cloudformation package  --profile ${AWS_PROFILE} --template $< --s3-bucket $(DEPLOYMENT_BUCKET) --output-template-file $@
 
 deploy: build/output.yaml
-	aws cloudformation deploy --template $< --stack-name $(STACK_NAME)
-	aws cloudformation describe-stacks --stack-name $(STACK_NAME) --query Stacks[].Outputs --output table
+	aws cloudformation deploy --profile ${AWS_PROFILE} --template $< --stack-name $(STACK_NAME)
+	aws cloudformation describe-stacks  --profile ${AWS_PROFILE} --stack-name $(STACK_NAME) --query Stacks[].Outputs --output table
 
 deploy-example: deploy
 	cd example && \

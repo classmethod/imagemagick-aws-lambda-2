@@ -60,7 +60,7 @@ These libraries are currently bundled:
 Run the following command to deploy the compiled result as a layer in your AWS account.
 
 ```
-make deploy DEPLOYMENT_BUCKET=<YOUR BUCKET NAME>
+make deploy DEPLOYMENT_BUCKET=<YOUR BUCKET NAME> AWS_PROFILE=<AWS PROFILE NAME>
 ```
 
 ### configuring the deployment
